@@ -73,9 +73,9 @@ getGiphy = async function () {
 //This is a helper function that helps renders a button on each GIf based on condition
 const getButton = function (data) {
   if (data.source_post_url) {
-    return `<a href=${data.source_post_url} target="_blank" class="btn btn-primary">Go To GIF Source</a>`;
+    return `<a href=${data.source_post_url} target="_blank" class="btn btn-primary">Go to this GIF </a>`;
   } else {
-    return `<p><i>No Source Post Available</i></p>`;
+    return `<p><i>No Gif Path Available</i></p>`;
   }
 };
 

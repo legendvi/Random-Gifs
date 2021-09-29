@@ -37,12 +37,13 @@ getRandomWord = async function () {
       `https://random-word-api.herokuapp.com/word?number=1`
     );
     const data = await res.json();
+    if (!res.ok) throw new Error("Some issue in getting a word");
     const html = `<p class="display-4">Random word generated is</p>
       <p class="h1">${data[0]}</p>`;
     word.insertAdjacentHTML("afterbegin", html);
     return data[0];
   } catch (error) {
-    gifGrid.insertAdjacentText("afterbegin", "Some issue in getting a word");
+    gifGrid.insertAdjacentText("afterbegin", error.message);
   }
 };
 
@@ -58,7 +59,7 @@ getGiphy = async function () {
     );
     const value = await res.json();
     //checks if array is emoty or not
-    if (value.data.length === 0) throw new Error();
+    if (value.data.length === 0) throw new Error("No gif Found for this Word");
     //takes each element from array
     value.data.forEach((element) => {
       let html = getGifs(element); //getGifs generates html for each gifs and returns
@@ -67,7 +68,7 @@ getGiphy = async function () {
     });
   } catch (error) {
     // catches any error thrown and displays message to user
-    showError.insertAdjacentText("afterbegin", "No gif Found for this Word");
+    showError.insertAdjacentText("afterbegin", error.message);
   }
 };
 //This is a helper function that helps renders a button on each GIf based on condition
